@@ -1,0 +1,5 @@
+#!/bin/bash
+make
+./T7
+python plot.py
+make clean
