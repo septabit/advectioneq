@@ -9,7 +9,7 @@ program T7
 	real :: x(nx),xmin,xmax,u(nx)
 	integer :: method 
 
-
+!	setting variables
 	v = 1.
 	tmax = 1
 	dx = 1./nx  
@@ -18,7 +18,8 @@ program T7
 	xmin = 0
 	xmax = 1
 
-	do   !Choosing which method
+!	Choose your method!
+	do   
 		print*, "Enter which method you'd like to use:"
 		print*, "1: Upwind,2: Lax"
 		read(*,*) method
@@ -28,13 +29,15 @@ program T7
 		print*, "Please try again, this time with an actual value you can use."
 	end do
 
+!	Call functions to set grid and initial values!
 	call set_grid(x,xmin,xmax) !creating x array
 	call set_initial(x,u)
 
+!	Step in whichever method you want to use!
 	t = 0
 	tmax = 1
 	istep = 0
-	call outfile(nx, dx, u, istep,1) !To print for t=0
+	call outfile(nx, dx, u, istep,1) 
 	do while (t<tmax)
 		t = t + dt
 		call u_advance(x,u,v,dt,dx,method)
